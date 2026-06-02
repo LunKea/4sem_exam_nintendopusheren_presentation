@@ -1,0 +1,249 @@
+---
+//@ts-nocheck
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout>
+  <div class="flex flex-col gap-1">
+    <Heading size="large" color="primary" weight="bold">Ugens nye varer</Heading
+    >
+    <Text
+      >Her kan du se de nyeste varer i butikken. Vi opdaterer denne side hver
+      uge, så kom endelig tilbage for at se, hvad der er kommet ind.</Text
+    >
+  </div>
+
+  <Heading stylingclasses="place-self-center my-5">22/4 2026</Heading>
+
+  <section class="carousel_section">
+    <Heading stylingclasses="place-self-center my-5">Nye spil</Heading>
+    <div class="carousel_wrapper">
+      <img
+        src="/img/leftArrow_outline.svg"
+        alt="left arrow"
+        class="carousel_arrow"
+        id="prevBtn"
+      />
+
+      <div class="carousel_track_container">
+        <div class="carousel_track" id="carouselTrack">
+          <div class="carousel_slide">
+            <img class="" src="/img/spil1.webp" alt="Nye spil billede 1" />
+          </div>
+          <div class="carousel_slide">
+            <img src="/img/spil2.webp" alt="Nye spil billede 2" />
+          </div>
+          <div class="carousel_slide">
+            <img src="/img/spil3.webp" alt="Nye spil billede 3" />
+          </div>
+        </div>
+      </div>
+
+      <img
+        src="/img/rightArrow_outline.svg"
+        alt="right arrow"
+        class="carousel_arrow"
+        id="nextBtn"
+      />
+      <!-- <button class="carousel_arrow right" id="nextBtn">&#9654;</button> -->
+    </div>
+
+    <Heading stylingclasses="place-self-center my-5">Nyt merch</Heading>
+    <div class="carousel_wrapper_consoles">
+      <img
+        src="/img/leftArrow_outline.svg"
+        alt="left arrow"
+        class="carousel_arrow_consoles"
+        id="prevBtn_consoles"
+      />
+
+      <div class="carousel_track_container_consoles">
+        <div class="carousel_track_consoles" id="carouselTrack_consoles">
+          <div class="carousel_slide_consoles">
+            <img src="/img/merch1.webp" alt="Nyt merch billede 1" />
+          </div>
+          <div class="carousel_slide_consoles">
+            <img src="/img/merch2.webp" alt="Nyt merch billede 2" />
+          </div>
+          <div class="carousel_slide_consoles">
+            <img src="/img/merch3.webp" alt="Nyt merch billede 3" />
+          </div>
+        </div>
+      </div>
+      <img
+        src="/img/rightArrow_outline.svg"
+        alt="right arrow"
+        class="carousel_arrow_consoles"
+        id="nextBtn_consoles"
+      />
+    </div>
+  </section>
+  <div id="lightbox" class="lightbox_overlay">
+    <img id="lightbox_img" src="" alt="" />
+  </div>
+</MainLayout>
+
+<style>
+  .carousel_section {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .carousel_title,
+  .carousel_title_consoles {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary, #111);
+  }
+
+  .carousel_wrapper,
+  .carousel_wrapper_consoles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 50%;
+  }
+
+  .carousel_track_container,
+  .carousel_track_container_consoles {
+    overflow: hidden;
+    flex: 1;
+    border-radius: 8px;
+  }
+
+  .carousel_track,
+  .carousel_track_consoles {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+
+  .carousel_slide,
+  .carousel_slide_consoles {
+    min-width: 100%;
+  }
+
+  .carousel_slide img,
+  .carousel_slide_consoles img {
+    width: 100%;
+    aspect-ratio: unset;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    background: #e5e5e5;
+  }
+
+  .carousel_arrow,
+  .carousel_arrow_consoles {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #c0392b;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .carousel_arrow,
+  .carousel_arrow_consoles {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #c0392b;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .carousel_arrow:hover,
+  .carousel_arrow_consoles:hover {
+    opacity: 1;
+  }
+
+  /* Lightbox Styles for clicking on image to make it bigger */
+  .lightbox_overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .lightbox_overlay.active {
+    display: flex;
+  }
+
+  #lightbox_img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: default;
+  }
+</style>
+
+<script is:inline>
+  const track = document.getElementById("carouselTrack");
+  const track_consoles = document.getElementById("carouselTrack_consoles");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  const prevBtn_consoles = document.getElementById("prevBtn_consoles");
+  const nextBtn_consoles = document.getElementById("nextBtn_consoles");
+  const slides = track.children;
+  const slides_consoles = track_consoles.children;
+  let current = 0;
+  let current_consoles = 0;
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  function goTo_consoles(index) {
+    current_consoles =
+      (index + slides_consoles.length) % slides_consoles.length;
+    track_consoles.style.transform = `translateX(-${current_consoles * 100}%)`;
+  }
+
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+  prevBtn_consoles.addEventListener("click", () =>
+    goTo_consoles(current_consoles - 1),
+  );
+  nextBtn_consoles.addEventListener("click", () =>
+    goTo_consoles(current_consoles + 1),
+  );
+
+  // Click on image to make it bigger function
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox_img");
+
+  document
+    .querySelectorAll(".carousel_slide img, .carousel_slide_consoles img")
+    .forEach((img) => {
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("active");
+      });
+    });
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target !== lightboxImg) {
+      lightbox.classList.remove("active");
+    }
+  });
+</script>

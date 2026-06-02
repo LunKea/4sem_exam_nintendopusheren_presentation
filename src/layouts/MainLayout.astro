@@ -1,0 +1,48 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/tailwind.css';
+const { title } = Astro.props;
+import LeftCategory from "../components/LeftCategory.astro";
+import RightCategory from "../components/RightCategory.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{Astro.props.title}</title>
+		<script defer src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"></script>
+	</head>
+	<body class="body-x-margin body-y-margin">
+
+		<header>
+			<Header></Header>
+		</header>
+		<section class="flex flex-row">
+			<LeftCategory></LeftCategory>
+
+		<main class="w-full min-h-screen ">
+			<slot />
+
+		</main>
+	<RightCategory></RightCategory>
+		</section>
+		<footer>
+			<Footer></Footer>
+		</footer>
+			
+	</body>
+</html>
+
+<style>
+main{
+	margin-top: var(--margin-y-axis:);
+	margin-bottom: var(--margin-y-axis:);
+	margin-left: var(--margin-x-axis);
+	margin-right: var(--margin-x-axis);
+}
+
+</style>

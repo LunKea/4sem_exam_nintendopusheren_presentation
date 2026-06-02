@@ -1,0 +1,201 @@
+---
+import '../styles/tailwind.css';
+
+// url and key to supabase/database
+const url = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/";
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyaHBmdWFtdmJiZnZmaGZjaGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3ODA5OTMsImV4cCI6MjA5NTM1Njk5M30.pDuU-_jF2L-ehWC0LVdEd8wuTOJprqtwgGcygfZN-zE";
+
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+
+// fetch data
+const data = await fetch(url, options).then((res) => {
+  return res.json();
+});
+
+---
+
+<section class="category_section min-w-50 translate-z-2">
+<div class="flex flex-col category">
+    <div id="konsoller" class="active_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+        <img src="/icons/menu.svg" alt="Menu icon">
+    <p class="text-white">Konsoller</p>
+    <img src="/icons/arrow_up.svg" alt="Arrow up icon">
+    </div>
+
+    <div id="konsoller_list" class="flex flex-col">
+    <a class="category category_btn min-h-10 place-content-center" href="/switch2">
+        <p class="ml-2">Switch 2-Udvalg</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/playstation">
+        <p class="ml-2">Playstation</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/xbox">
+        <p class="ml-2">Xbox</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <p class="ml-2">Sega (WIP)</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <p class="ml-2">Evercade (WIP)</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="">
+        <p class="ml-2">Andre konsoller (WIP)</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <p class="ml-2">Konsol tilbehør</p>
+    </a>
+
+    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <p class="ml-2">Reservedele til konsoller (WIP)</p>
+    </a>
+    </div>
+</div>
+
+<div class="flex flex-col category">
+    <div id="merch" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+        <img src="/icons/menu.svg" alt="Menu icon">
+    <p class="text-white">Merchandise</p>
+    <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
+    </div>
+
+    <div id="merch_list" class="hidden">
+<a class="category category_btn min-h-10 flex" href="">
+    <p class="ml-2">Disney Infinite (WIP)</p>
+    </a>
+    </div>
+</div>
+
+<div class="flex flex-col category">
+    <div id="figurer" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+        <img src="/icons/menu.svg" alt="Menu icon">
+    <p class="text-white">Figurer til spil</p>
+    <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
+    </div>
+
+    <div id="figurer_list" class="hidden flex flex-col">
+    <a class="category category_btn min-h-10 flex" href="...">
+    <p class="ml-2">Skylanders (WIP)</p>
+    </a>
+
+    <a class="category category_btn min-h-10 flex" href="...">
+    <p class="ml-2">Disney Infinite (WIP)</p>
+    </a>
+    </div>
+</div>
+
+
+</section>
+
+<style>
+
+    .active_category {
+        background-color: var(--cta-background-active);
+        cursor: pointer;
+    }
+
+    .inactive_category {
+        background-color: var(--cta-background-inactive);
+        cursor: pointer;
+    }
+
+    .inactive_arrow {
+        transform: rotate(90deg);
+    }
+
+    .category{
+        outline: 2px solid black;
+    }
+
+    .category_btn {
+        outline: 2px solid black;
+        background: var(--cta-background);
+        font-color: var(--cta-text-secondary);
+    }
+
+</style>
+
+<script is:inline>
+    const konsollerBtn = document.querySelector('#konsoller');
+    const merchBtn = document.querySelector('#merch');
+    const figurerBtn = document.querySelector('#figurer');
+    const konsollerList = document.querySelector('#konsoller_list');
+    const merchList = document.querySelector('#merch_list');
+    const figurerList = document.querySelector('#figurer_list');
+
+    // Restore menu states from sessionStorage on page load
+    function restoreMenuStates() {
+        const konsollerState = sessionStorage.getItem('konsoller_active');
+        const merchState = sessionStorage.getItem('merch_active');
+        const figurerState = sessionStorage.getItem('figurer_active');
+
+        if (konsollerState === 'false') {
+            konsollerBtn.classList.remove('active_category');
+            konsollerBtn.classList.add('inactive_category');
+            konsollerList.classList.add('hidden');
+            const arrow = konsollerBtn.querySelector('img:last-child');
+            if (arrow) arrow.classList.add('inactive_arrow');
+        }
+
+        if (merchState === 'true') {
+            merchBtn.classList.remove('inactive_category');
+            merchBtn.classList.add('active_category');
+            merchList.classList.remove('hidden');
+            const arrow = merchBtn.querySelector('img:last-child');
+            if (arrow) arrow.classList.remove('inactive_arrow');
+        }
+
+        if (figurerState === 'true') {
+            figurerBtn.classList.remove('inactive_category');
+            figurerBtn.classList.add('active_category');
+            figurerList.classList.remove('hidden');
+            const arrow = figurerBtn.querySelector('img:last-child');
+            if (arrow) arrow.classList.remove('inactive_arrow');
+        }
+    }
+
+    function setupCategoryToggle(btnElement, listElement, storageKey) {
+        btnElement.addEventListener('click', () => {
+            const isActive = btnElement.classList.contains('active_category');
+            
+            // Toggle active/inactive classes
+            if (isActive) {
+                btnElement.classList.remove('active_category');
+                btnElement.classList.add('inactive_category');
+            } else {
+                btnElement.classList.remove('inactive_category');
+                btnElement.classList.add('active_category');
+            }
+
+            // Toggle list visibility
+            listElement.classList.toggle('hidden');
+
+            // Toggle arrow rotation
+            const arrow = btnElement.querySelector('img:last-child');
+            if (arrow) {
+                arrow.classList.toggle('inactive_arrow');
+            }
+
+            // Save state to sessionStorage
+            const newState = !isActive;
+            sessionStorage.setItem(storageKey, newState);
+        });
+    }
+
+    // Restore menu states on page load
+    restoreMenuStates();
+
+    setupCategoryToggle(konsollerBtn, konsollerList, 'konsoller_active');
+    setupCategoryToggle(merchBtn, merchList, 'merch_active');
+    setupCategoryToggle(figurerBtn, figurerList, 'figurer_active');
+</script>

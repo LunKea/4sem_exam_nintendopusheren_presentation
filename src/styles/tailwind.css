@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/forms';
+@import "tailwindcss-animated";
+@import "tailwindcss-intersect";
+
+@theme {
+  /* Her tilføjes theme variable // tokens */
+
+  --color-red-400: #dd3333;
+  --color-red-200: #ff0000;
+  --color-black-1000: #000000;
+  --color-black-500: #7f7f7f;
+  --color-yellow-500: #d9b900;
+  --color-orange-500: #d97400;
+  --color-white: #ffffff;
+
+  /* Body margin */
+  --margin-x-axis: 4.2%;
+  --margin-y-axis: 5%;
+
+  /* RADIUS VALUES */
+  --radius-tags: 5px;
+  --radius-icons: 10px;
+  --radius-CTA: 50px;
+
+  /* FONTS */
+  --font-sans: "inter-variable", sans-serif;
+}
+
+@theme inline {
+  /* TOKENS */
+
+  /* TEXT TOKENS */
+  --font-color-primary: var(--color-red-400);
+
+  /* CTAs */
+  --cta-background-active: var(--color-red-400);
+  --cta-background-inactive: var(--color-black-500);
+  --cta-text-primary: var(--color-white);
+
+  /* FOR BUTTONS UNDER CATEGORY left/right menu */
+  --cta-background: var(--color-gray-200);
+  --cta-text-secondary: var(--color-gray-800);
+  --cta-category-hover: var(--color-gray-300);
+
+  --category-background: var(--color-white);
+
+  /* TAGS */
+  --tag-discount-bg: var(--color-yellow-500);
+  --tag-preorder-bg: var(--color-orange-500);
+  --tag-text-color: var(--color-black-1000);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer components {
+  .body-x-margin {
+    margin-left: var(--margin-x-axis);
+    margin-right: var(--margin-x-axis);
+  }
+
+  .body-y-margin {
+    margin-top: var(--margin-y-axis);
+    margin-bottom: var(--margin-y-axis);
+  }
+  @layer utilities {
+  }
+}

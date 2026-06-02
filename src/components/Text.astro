@@ -1,0 +1,42 @@
+---
+const {
+  size = "medium",
+  font = "sans",
+  weight = "medium",
+  color = "primary",
+  stylingclasses = "",
+} = Astro.props;
+
+const sizeClasses = {
+  medium: "text-[1rem] md:text-[1.125rem] lg:text-[0.938rem]",
+  small: "text-[0.875rem] lg:text-[0.82rem]",
+  xsmall: "text-[0.75rem] lg:text-[0.438rem]",
+};
+
+const fontClasses = {
+  sans: "font-sans",
+};
+
+const weightClasses = {
+  light: "font-light",
+  medium: "font-medium",
+  bold: "font-bold",
+};
+
+const fontColor = {
+  primary: "text-[var(--font-color-primary)]",
+  secondary: "text-[var(--font-color-secondary)]",
+};
+---
+
+<p
+  class:list={[
+    sizeClasses[size],
+    fontClasses[font],
+    weightClasses[weight],
+    fontColor[color],
+    stylingclasses,
+  ]}
+>
+  <slot />
+</p>

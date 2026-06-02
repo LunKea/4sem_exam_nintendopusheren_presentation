@@ -1,0 +1,29 @@
+---
+import Text from "../components/Text.astro";
+import Heading from "../components/Heading.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout>
+<Heading>Arrangementer i butikken</Heading>
+<div class="flex flex-col gap-5">
+
+<div class="flex flex-col gap-3">
+<Text>Vi afholder flere arrengementer i butikken</Text>
+<Text>Et af dem er månedlige Mario Kart 64-turneringer</Text>
+<Text>Følg med i datoer for næste turnering her: Facebook</Text>
+</div>
+</div>
+
+<section class="flex flex-col gap-3">
+<div class="mt-5">
+<Heading>Rundtur</Heading>
+<Text>Du kan få en rundtur og så butikken på vores youtube kanal!</Text>
+</div>
+
+<a href="https://www.youtube.com/channel/UCHle_5OToJg_pkRVDtN_F8g">
+<img src="/img/youtube.png" alt="">
+</a>
+<Text>(næsten)Hver måned bliver der filmet en rundtur i butikken, hvor der snakkes lidt om hvordan det står til og hvad der evt er sket siden sidst.</Text>
+</section>
+</MainLayout>

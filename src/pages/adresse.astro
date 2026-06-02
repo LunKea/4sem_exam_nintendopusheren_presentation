@@ -1,0 +1,56 @@
+---
+import Mainlayout from "../layouts/MainLayout.astro";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+---
+<Mainlayout>
+<Heading>Åbningstider, adresse og kontakt </Heading>
+<Text>Adressen er Ydungsade 4-6, 2200 Kbh N</Text>
+
+<Text weight="bold" stylingclasses="mt-5">Åbningstider:</Text>
+
+<div class="flex flex-row">
+    <Text weight="bold">Mandag:</Text>
+    <Text>10:00 - 18:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Tirsdag:</Text>
+    <Text>10:00 - 18:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Onsdag:</Text>
+    <Text>10:00 - 18:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Torsdag:</Text>
+    <Text>10:00 - 18:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Fredag:</Text>
+    <Text>10:00 - 18:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Lørdag:</Text>
+    <Text>11:00 - 16:00</Text>
+</div>
+
+<div class="flex flex-row">
+    <Text weight="bold">Søndag:</Text>
+    <Text>ÅBEN FØRSTE SØNDAG HVER MÅNED - 12-15</Text>
+</div>
+
+<Heading stylingclasses="mt-5">Kontakt på telefon:</Heading>
+<div class="flex flex-row gap-1">
+<Text weight="bold">Telefon:</Text>
+<Text>60 57 12 82</Text>
+<Text>(KUN OPKALD)</Text>
+</div>
+
+<Heading stylingclasses="mt-5 mb-2">Find vejen til butikken</Heading>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5486.418526509133!2d12.550375512713062!3d55.69878939603752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465253b629f7fff1%3A0xeb40e44e281b3414!2sNintendopusheren!5e1!3m2!1sen!2sdk!4v1779939263767!5m2!1sen!2sdk" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</Mainlayout>

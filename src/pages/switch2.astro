@@ -1,0 +1,324 @@
+---
+//@ts-nocheck
+import MainLayout from "../layouts/MainLayout.astro";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+import Card from "../components/card.astro";
+
+// url and key to supabase/database
+const url = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/Switch2";
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyaHBmdWFtdmJiZnZmaGZjaGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3ODA5OTMsImV4cCI6MjA5NTM1Njk5M30.pDuU-_jF2L-ehWC0LVdEd8wuTOJprqtwgGcygfZN-zE";
+
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+// fetch data
+const response = await fetch(url, options);
+const data = await response.json();
+const products = Array.isArray(data) ? data : [];
+console.log("Products data:", products); // DEBUG: Check what fields exist
+
+// Checks what the date is
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// Counts how many products have a release date in the future (Hence why it says releaseDate > today)
+const releaseCount = products.filter((p) => {
+  if (!p.release) return false;
+  const releaseDate = new Date(p.release);
+  releaseDate.setHours(0, 0, 0, 0);
+  return releaseDate > today;
+}).length;
+
+const gameCount = products.filter((p) => p.type === "game").length;
+const usedCount = products.filter((p) => p.type === "used").length;
+const discountCount = products.filter(
+  (p) => p.discount !== null && p.discount !== undefined,
+).length;
+const consoleCount = products.filter((p) => p.type === "console").length;
+const accessoryCount = products.filter((p) => p.type === "accesory").length;
+
+const totalCount = products.length;
+
+const { title, category, qty, price, desc, release, discount } = Astro.props;
+---
+
+<MainLayout title="Titel">
+  <section id="category" class="flex flex-row flex-wrap gap-4">
+    <div class="w-fit">
+      <a href="#" data-filter="all" class="cursor-pointer">
+        <img
+          src="/img/switch2_logo.png"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Alle produkter</Text>
+          <Text>{totalCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="preorder" class="cursor-pointer">
+        <img
+          src="/img/SplatoonRaiders.webp"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Forudbestillinger</Text>
+          <Text>{releaseCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="game" class="cursor-pointer">
+        <img
+          src="/img/digimon-story-timestranger.webp"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Nyt spil</Text>
+          <Text>{gameCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="used" class="cursor-pointer">
+        <img
+          src="/img/metal-gear-solid-.webp"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Brugte spil</Text>
+          <Text>{usedCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="discount" class="cursor-pointer">
+        <img
+          src="/img/adventures-of-elliot-.webp"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>På tilbud</Text>
+          <Text>{discountCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="console" class="cursor-pointer">
+        <img
+          src="/img/NintendoSwitch2.png"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Switch 2 konsol</Text>
+          <Text>{consoleCount}</Text>
+        </div>
+      </a>
+    </div>
+
+    <div class="w-fit">
+      <a href="#" data-filter="accesory" class="cursor-pointer">
+        <img
+          src="/img/NintendoSwitch2-CarryingCase.png"
+          alt="Image for category"
+          class="w-35 h-35 object-cover"
+        />
+        <div class="flex flex-row place-content-between">
+          <Text>Switch 2 tilbehør</Text>
+          <Text>{accessoryCount}</Text>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <Heading stylingclasses=" mt-10 decoration-red-50"
+    >Kategori: Switch 2-udvalg</Heading
+  >
+
+  <section
+    id="products-section"
+    class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 min-h-250"
+  >
+    {
+      products.map((product) => (
+        <div
+          data-type={product.type}
+          data-release={product.release}
+          data-discount={product.discount}
+        >
+          <Card {product} />
+        </div>
+      ))
+    }
+  </section>
+
+  <div id="pagination" class="flex gap-3 mt-10 mb-10 justify-center"></div>
+
+  <script>
+    const PRODUCTS_PER_PAGE = 9;
+    let currentPage = 1;
+
+    function updatePagination() {
+      const visibleProducts = Array.from(
+        document.querySelectorAll("[data-type]"),
+      ).filter((p) => p.style.display !== "none");
+      const totalPages = Math.ceil(visibleProducts.length / PRODUCTS_PER_PAGE);
+
+      // Reset to page 1 if current page exceeds total pages
+      if (currentPage > totalPages) {
+        currentPage = 1;
+      }
+
+      // Hide all products
+      document.querySelectorAll("[data-type]").forEach((p) => {
+        p.classList.add("hidden");
+      });
+
+      // Show products for current page
+      const startIdx = (currentPage - 1) * PRODUCTS_PER_PAGE;
+      const endIdx = startIdx + PRODUCTS_PER_PAGE;
+      visibleProducts.slice(startIdx, endIdx).forEach((p) => {
+        p.classList.remove("hidden");
+      });
+
+      // Update pagination buttons
+      const paginationDiv = document.getElementById("pagination");
+      paginationDiv.innerHTML = "";
+
+      if (totalPages > 1) {
+        // Add back arrow button
+        if (currentPage > 1) {
+          const backBtn = document.createElement("button");
+          backBtn.innerHTML = "←";
+          backBtn.className =
+            "w-12 h-12 rounded-lg bg-gray-200 text-gray-800 font-semibold cursor-pointer transition hover:bg-gray-300";
+          backBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+              currentPage--;
+              updatePagination();
+            }
+          });
+          paginationDiv.appendChild(backBtn);
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement("button");
+          btn.textContent = i;
+          btn.className = `w-12 h-12 rounded-lg font-semibold cursor-pointer transition ${
+            i === currentPage
+              ? "bg-red-500 text-white"
+              : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+          }`;
+          btn.addEventListener("click", () => {
+            currentPage = i;
+            updatePagination();
+          });
+          paginationDiv.appendChild(btn);
+        }
+
+        // Add next arrow button
+        if (currentPage < totalPages) {
+          const nextBtn = document.createElement("button");
+          nextBtn.innerHTML = "→";
+          nextBtn.className =
+            "w-12 h-12 rounded-lg bg-gray-200 text-gray-800 font-semibold cursor-pointer transition hover:bg-gray-300";
+          nextBtn.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+              currentPage++;
+              updatePagination();
+            }
+          });
+          paginationDiv.appendChild(nextBtn);
+        }
+      }
+    }
+
+    function applyFilter(filterType) {
+      const products = document.querySelectorAll("[data-type]");
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      products.forEach((product) => {
+        let shouldDisplay = false;
+
+        if (filterType === null) {
+          // Show all products
+          shouldDisplay = true;
+        } else if (filterType === "preorder") {
+          // Show only products with future release dates
+          const releaseDate = new Date(product.dataset.release);
+          releaseDate.setHours(0, 0, 0, 0);
+          shouldDisplay = releaseDate > today;
+        } else if (filterType === "discount") {
+          // Show only products with a discount
+          shouldDisplay =
+            product.dataset.discount &&
+            product.dataset.discount !== "undefined";
+        } else {
+          // Show products matching the type
+          shouldDisplay = product.dataset.type === filterType;
+        }
+
+        product.style.display = shouldDisplay ? "" : "none";
+      });
+
+      // Reset to page 1 and update pagination
+      currentPage = 1;
+      updatePagination();
+    }
+
+    // Function to restore filter from URL
+    function restoreFilterFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const urlFilter = params.get("type");
+      if (urlFilter) {
+        applyFilter(urlFilter);
+      } else {
+        updatePagination();
+      }
+    }
+
+    // Restore filter on initial page load
+    restoreFilterFromURL();
+
+    // Restore filter when returning to this page (from back button or history)
+    window.addEventListener("pageshow", restoreFilterFromURL);
+
+    // Add click handlers to filter buttons
+    document.querySelectorAll("[data-filter]").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const filterType = e.currentTarget.dataset.filter;
+
+        // Update URL
+        const newUrl = new URL(window.location);
+        if (filterType === "all") {
+          // Remove the filter parameter to show all products
+          newUrl.searchParams.delete("type");
+        } else {
+          newUrl.searchParams.set("type", filterType);
+        }
+        window.history.pushState({}, "", newUrl);
+
+        // Apply filter
+        applyFilter(filterType === "all" ? null : filterType);
+      });
+    });
+  </script>
+</MainLayout>

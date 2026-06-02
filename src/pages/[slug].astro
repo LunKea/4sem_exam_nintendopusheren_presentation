@@ -1,0 +1,197 @@
+---
+//@ts-nocheck
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from "../components/Button.astro";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+
+export async function getStaticPaths() {
+  // url and key to supabase/database
+  const url1 =
+    "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/NintendoPusheren";
+  const url2 = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/Switch2";
+  const url3 = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/Playstation";
+  const url4 = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/Xbox";
+  const key =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyaHBmdWFtdmJiZnZmaGZjaGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3ODA5OTMsImV4cCI6MjA5NTM1Njk5M30.pDuU-_jF2L-ehWC0LVdEd8wuTOJprqtwgGcygfZN-zE";
+
+  const options = {
+    headers: {
+      apikey: key,
+    },
+  };
+  const data1 = await fetch(url1, options).then((res) => {
+    return res.json();
+  });
+
+  const data2 = await fetch(url2, options).then((res) => {
+    return res.json();
+  });
+
+  const data3 = await fetch(url3, options).then((res) => {
+    return res.json();
+  });
+
+  const data4 = await fetch(url4, options).then((res) => {
+    return res.json();
+  });
+
+  const data = Array.isArray(data1) ? data1 : [];
+  const data2Array = Array.isArray(data2) ? data2 : [];
+  const data3Array = Array.isArray(data3) ? data3 : [];
+  const data4Array = Array.isArray(data4) ? data4 : [];
+  const allProducts = [...data, ...data2Array, ...data3Array, ...data4Array];
+
+  return allProducts.map((product) => {
+    return {
+      params: { slug: product.slug },
+      props: { myProduct: product },
+    };
+  });
+}
+
+// const { id } = Astro.params;
+const { myProduct } = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const releaseDate = new Date(myProduct.release);
+releaseDate.setHours(0, 0, 0, 0);
+---
+
+<MainLayout title="Titel">
+  <section class="mx-10">
+    <a href="#" onclick="history.back()">
+      <div class="flex flex-row my-5">
+        <img
+          src="/img/leftArrow_solid.svg"
+          alt="Image for category"
+          class="w-5 h-auto mr-2"
+        />
+        <Text weight="bold">Tilbage</Text>
+      </div>
+    </a>
+
+    <section class="grid grid-cols-2 gap-5">
+      <div>
+        {
+          releaseDate > today && myProduct.discount ? (
+            <div class="relative">
+              <div class="max-w-25 rounded-xl bg-amber-200 min-w-20 absolute place-self-end top-0 text-center">
+                <p>Pre-Order</p>
+              </div>
+              <div class="max-w-25 rounded-xl bg-green-200 min-w-20 absolute place-self-end top-7 text-center">
+                <p>Tilbud</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div class="relative">
+                {releaseDate > today && (
+                  <div class="max-w-25 rounded-xl bg-amber-200 min-w-20 absolute place-self-end top-0 text-center">
+                    <p>Pre-Order</p>
+                  </div>
+                )}
+
+                {myProduct.discount && (
+                  <div class="max-w-25 rounded-xl bg-green-200 min-w-20 absolute place-self-end top-0 text-center">
+                    <p>Tilbud</p>
+                  </div>
+                )}
+
+                {myProduct.type == "used" && (
+                  <div class="max-w-25 rounded-xl bg-black-500 min-w-20 absolute place-self-end top-0 text-center">
+                    <p class="text-white">Brugt</p>
+                  </div>
+                )}
+              </div>
+            </>
+          )
+        }
+        <Text size="xsmall">
+          Home/ {myProduct?.category}/ {myProduct?.title}
+        </Text>
+        <img
+          src={myProduct?.img}
+          alt="product"
+          class="w-auto h-200 place-self-center"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2 just">
+        <Heading size="large"> {myProduct?.title}</Heading>
+        <Text>Type: {myProduct?.type}</Text>
+
+        {
+          myProduct.discount && (
+            <Heading stylingclasses="opacity-50 line-through">
+              {myProduct.price},00 kr
+            </Heading>
+          )
+        }
+        <Heading
+          >{
+            Math.ceil(
+              myProduct.price - myProduct.price * (myProduct.discount / 100),
+            )
+          },00 kr</Heading
+        >
+
+        <div class="qty">
+          {
+            myProduct.qty > 0 ? (
+              <Text stylingclasses="text-green-600">På lager</Text>
+            ) : (
+              <Text stylingclasses="text-red-600">Ikke på lager</Text>
+            )
+          }
+        </div>
+
+        <div class="h-90">
+          <Text stylingclasses="whitespace-pre-line">{myProduct?.desc}</Text>
+        </div>
+
+        <div class="flex flex-row justify-between mt-auto">
+          <div class="flex flex-row">
+            <div
+              class="flex place-content-center w-20 h-10 shopBTN outline-1 outline-black-500 outline-"
+            >
+              <Heading weight="bold" stylingclasses="place-self-center"
+                >-</Heading
+              >
+            </div>
+
+            <div
+              class="flex place-content-center w-20 h-10 outline-1 outline-black-500 shopBTN"
+            >
+              <Heading weight="bold" stylingclasses="place-self-center"
+                >1</Heading
+              >
+            </div>
+
+            <div
+              class="flex place-content-center w-20 h-10 outline-1 outline-black-500 shopBTN"
+            >
+              <Heading weight="bold" stylingclasses="place-self-center"
+                >+</Heading
+              >
+            </div>
+          </div>
+          <div class="flex place-content-center w-20 h-10 outline-1 cartBTN">
+            <img src="/img/cart.webp" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</MainLayout>
+
+<style>
+  .shopBTN {
+    background: var(--cta-background);
+  }
+
+  .cartBTN {
+    background: var(--cta-background-active);
+  }
+</style>

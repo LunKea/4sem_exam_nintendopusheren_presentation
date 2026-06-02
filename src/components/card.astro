@@ -1,0 +1,68 @@
+---
+//@ts-nocheck
+import Text from "./Text.astro";
+
+const { product } = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const releaseDate = new Date(product.release);
+releaseDate.setHours(0, 0, 0, 0);
+---
+
+<a class="flex flex-col" href=`/${product.slug}`>
+  <!-- Image + tags wrapper -->
+  <div class="relative place-self-center">
+    <img
+      src={product.img}
+      alt="Image for product"
+      class="w-auto min-h-50 max-h-100 object-contain"
+    />
+
+    <div class="absolute right-1 top-0 flex flex-col gap-1 z-10">
+      {
+        releaseDate > today && (
+          <div class="rounded-xl bg-amber-200 min-w-20 text-center px-2">
+            <p>Pre-Order</p>
+          </div>
+        )
+      }
+      {
+        product.discount && (
+          <div class="rounded-xl bg-green-200 min-w-20 text-center px-2">
+            <p>Tilbud</p>
+          </div>
+        )
+      }
+      {
+        product.type == "used" && (
+          <div class="rounded-xl bg-black min-w-20 text-center px-2">
+            <p class="text-white">Brugt</p>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col place-self-center">
+    <Text color="secondary" stylingclasses="place-self-center">
+      {product.title}
+    </Text>
+    <div class="flex flex-row gap-2 place-self-center">
+      {
+        product.discount && (
+          <Text
+            color="secondary"
+            stylingclasses="mx-auto opacity-50 line-through"
+          >
+            {product.price},00 kr
+          </Text>
+        )
+      }
+      <Text stylingclasses="mx-auto">
+        {Math.ceil(product.price - product.price * (product.discount / 100))},00
+        kr
+      </Text>
+    </div>
+  </div>
+</a>
