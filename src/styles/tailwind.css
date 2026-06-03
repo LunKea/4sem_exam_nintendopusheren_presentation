@@ -12,21 +12,34 @@
   --color-red-200: #ff0000;
   --color-black-1000: #000000;
   --color-black-500: #7f7f7f;
-  --color-yellow-500: #d9b900;
-  --color-orange-500: #d97400;
+  /* --color-yellow-500: #d9b900; */
+  /* --color-orange-500: #d97400; */
   --color-white: #ffffff;
+  --color-amber-200: #fee685;
+  --color-green-200: #b9f8cf;
 
   /* Body margin */
-  --margin-x-axis: 20vw;
+  --margin-x-axis: 5vw;
   --margin-y-axis: 5%;
+
+  /* Main margin */
+  --main-margin-x-axis: 1vw;
 
   /* RADIUS VALUES */
   --radius-tags: 5px;
   --radius-icons: 10px;
   --radius-CTA: 50px;
 
+  --radius-medium: 15px;
+  --radius-pill: 100%;
+
   /* FONTS */
   --font-sans: "inter-variable", sans-serif;
+
+  /* Gaps */
+  --gap-small: 5px;
+  --gap-medium: 10px;
+  --gap-large: 15px;
 }
 
 @theme inline {
@@ -41,7 +54,7 @@
   --cta-text-primary: var(--color-white);
 
   /* FOR BUTTONS UNDER CATEGORY left/right menu */
-  --cta-background: var(--color-gray-200);
+  --cta-background: var(--color-white);
   --cta-text-secondary: var(--color-gray-800);
   --cta-category-hover: var(--color-gray-300);
 
@@ -73,6 +86,27 @@
     margin-top: var(--margin-y-axis);
     margin-bottom: var(--margin-y-axis);
   }
+
+  .main-x-margin {
+    margin-left: var(--main-margin-x-axis);
+    margin-right: var(--main-margin-x-axis);
+  }
+
   @layer utilities {
+  }
+
+  .category-cta {
+    background-color: var(--cta-background);
+    border-bottom: 1px solid var(--color-red-400);
+    padding-bottom: var(--gap-small);
+  }
+
+  .category-btn {
+    border-radius: var(--radius-medium);
+  }
+
+  .category-cta-gap {
+    margin-top: var(--gap-medium);
+    margin-bottom: var(--gap-medium);
   }
 }

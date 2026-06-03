@@ -1,5 +1,6 @@
 ---
 import '../styles/tailwind.css';
+import Text from './Text.astro';
 
 // url and key to supabase/database
 const url = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/";
@@ -23,73 +24,73 @@ const data = await fetch(url, options).then((res) => {
 <div class="flex flex-col category">
     <div id="Diverse" class="active_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
         <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Diverse</p>
+    <Text color="white">Diverse</Text>
     <img src="/icons/arrow_up.svg" alt="Arrow up icon">
     </div>
 
-  <div id="Diverse_list" class="flex flex-col">
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/nintendobonus">
-        <p class="ml-2">Gratis* Nintendo-bonus</p>
+  <div id="Diverse_list" class="flex flex-col gap-3 mb-3">
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/nintendobonus">
+        <Text class="ml-2">Gratis* Nintendo-bonus</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/playstation">
-        <p class="ml-2">%TILBUD%</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/playstation">
+        <Text class="ml-2">%TILBUD%</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/xbox">
-        <p class="ml-2">Sværd og Trolddom/Blod & Stål (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/xbox">
+        <Text class="ml-2">Sværd og Trolddom/Blod & Stål (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
-        <p class="ml-2">Fordubestllinger / <br> Pre-order (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
+        <Text class="ml-2">Fordubestllinger / <br> Pre-order (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
-        <p class="ml-2">Sealed spil (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
+        <Text class="ml-2">Sealed spil (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="">
-        <p class="ml-2">Steelbooks (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="">
+        <Text class="ml-2">Steelbooks (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
-        <p class="ml-2">Nye merchandise (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
+        <Text class="ml-2">Nye merchandise (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
-        <p class="ml-2">Uden for kategori (WIP)</p>
-    </a>
-    </div>
-</div>
-
-<div class="flex flex-col category">
-    <div id="physical_media" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
-        <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Film, bøger, osv</p>
-    <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
-    </div>
-
-    <div id="physical_media_list" class="hidden w-full flex-col">
-<a class="category category_btn min-h-10 flex w-full" href="wip"="">
-    <p class="ml-2">Disney Infinite (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="wip"="/Diverse/nes">
+        <Text class="ml-2">Uden for kategori (WIP)</Text>
     </a>
     </div>
 </div>
 
-<div class="flex flex-col category">
-    <div id="nintendopusheren" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+<div class="flex flex-col category category-cta-gap">
+    <div id="physical_media" class="inactive_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
         <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Nintendopusheren</p>
+    <Text color="white">Film, bøger, osv</Text>
     <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
     </div>
 
-    <div id="nintendopusheren_list" class="hidden w-full flex-col">
-    <a class="category category_btn min-h-10 place-content-center w-full" href="wip"="wip"="/Diverse/nes">
-        <p class="ml-2">Gavekort (WIP)</p>
+    <div id="physical_media_list" class="hidden flex flex-col">
+<a class="category-cta category category_btn min-h-10 flex" href="wip"="">
+    <Text class="ml-2">Disney Infinite (WIP)</Text>
+    </a>
+    </div>
+</div>
+
+<div class="flex flex-col category category-cta-gap">
+    <div id="nintendopusheren" class="inactive_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+        <img src="/icons/menu.svg" alt="Menu icon">
+    <Text color="white">Nintendopusheren</Text>
+    <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
+    </div>
+
+    <div id="nintendopusheren_list" class="hidden flex flex-col">
+    <a class="category-cta category category_btn min-h-10 flex" href="wip"="wip"="/Diverse/nes">
+        <Text class="ml-2">Gavekort (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center w-full" href="wip"="wip"="/Diverse/nes">
-    <p class="ml-2">Nintendopusheren merch (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 flex" href="wip"="wip"="/Diverse/nes">
+    <Text class="ml-2">Nintendopusheren merch (WIP)</Text>
     </a>
     </div>
 </div>
@@ -113,7 +114,7 @@ const data = await fetch(url, options).then((res) => {
         transform: rotate(90deg);
     }
 
-    .category{
+    /* .category{
         outline: 2px solid black;
     }
 
@@ -121,7 +122,7 @@ const data = await fetch(url, options).then((res) => {
         outline: 2px solid black;
         background: var(--cta-background);
         font-color: var(--cta-text-secondary);
-    }
+    } */
 
 </style>
 
@@ -137,56 +138,58 @@ const data = await fetch(url, options).then((res) => {
     function restoreMenuStates() {
         const DiverseState = sessionStorage.getItem('Diverse_active');
         const physicalMediaState = sessionStorage.getItem('physical_media_active');
-        const nintendopusherenState = sessionStorage.getItem('nintendopusheren _active');
+        const nintendopusherenState = sessionStorage.getItem('nintendopusheren_active');
 
         if (DiverseState === 'false') {
             DiverseBtn.classList.remove('active_category');
             DiverseBtn.classList.add('inactive_category');
             DiverseList.classList.add('hidden');
+            DiverseList.classList.remove('flex');
             const arrow = DiverseBtn.querySelector('img:last-child');
             if (arrow) arrow.classList.add('inactive_arrow');
         }
 
-if (physicalMediaState === 'true') {
-    physicalMediaBtn.classList.remove('inactive_category');
-    physicalMediaBtn.classList.add('active_category');
-    physicalMediaList.classList.remove('hidden');
-    physicalMediaList.classList.add('flex');  // ← add this
-    const arrow = physicalMediaBtn.querySelector('img:last-child');
-    if (arrow) arrow.classList.remove('inactive_arrow');
-}
+        if (physicalMediaState === 'true') {
+            physicalMediaBtn.classList.remove('inactive_category');
+            physicalMediaBtn.classList.add('active_category');
+            physicalMediaList.classList.remove('hidden');
+            physicalMediaList.classList.add('flex');
+            const arrow = physicalMediaBtn.querySelector('img:last-child');
+            if (arrow) arrow.classList.remove('inactive_arrow');
+        }
 
         if (nintendopusherenState === 'true') {
             nintendopusherenBtn.classList.remove('inactive_category');
             nintendopusherenBtn.classList.add('active_category');
             nintendopusherenList.classList.remove('hidden');
+            nintendopusherenList.classList.add('flex');
             const arrow = nintendopusherenBtn.querySelector('img:last-child');
             if (arrow) arrow.classList.remove('inactive_arrow');
         }
     }
 
     function setupCategoryToggle(btnElement, listElement, storageKey) {
-    btnElement.addEventListener('click', () => {
-        const isActive = btnElement.classList.contains('active_category');
-        
-        if (isActive) {
-            btnElement.classList.remove('active_category');
-            btnElement.classList.add('inactive_category');
-        } else {
-            btnElement.classList.remove('inactive_category');
-            btnElement.classList.add('active_category');
-        }
+        btnElement.addEventListener('click', () => {
+            const isActive = btnElement.classList.contains('active_category');
+            
+            if (isActive) {
+                btnElement.classList.remove('active_category');
+                btnElement.classList.add('inactive_category');
+            } else {
+                btnElement.classList.remove('inactive_category');
+                btnElement.classList.add('active_category');
+            }
 
-        // Toggle both hidden and flex together
-        listElement.classList.toggle('hidden');
-        listElement.classList.toggle('flex');  // ← add this
+            // Toggle both hidden and flex together
+            listElement.classList.toggle('hidden');
+            listElement.classList.toggle('flex');
 
-        const arrow = btnElement.querySelector('img:last-child');
-        if (arrow) arrow.classList.toggle('inactive_arrow');
+            const arrow = btnElement.querySelector('img:last-child');
+            if (arrow) arrow.classList.toggle('inactive_arrow');
 
-        sessionStorage.setItem(storageKey, !isActive);
-    });
-}
+            sessionStorage.setItem(storageKey, !isActive);
+        });
+    }
 
     // Restore menu states on page load
     restoreMenuStates();

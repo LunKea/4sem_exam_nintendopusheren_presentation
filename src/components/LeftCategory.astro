@@ -1,5 +1,6 @@
 ---
 import '../styles/tailwind.css';
+import Text from './Text.astro';
 
 // url and key to supabase/database
 const url = "https://hrhpfuamvbbfvfhfchbv.supabase.co/rest/v1/";
@@ -19,77 +20,78 @@ const data = await fetch(url, options).then((res) => {
 
 ---
 
-<section class="category_section min-w-50 translate-z-2">
+<section class="category_section min-w-50">
 <div class="flex flex-col category">
     <div id="konsoller" class="active_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
         <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Konsoller</p>
+    <Text color="white" stylingclasses="category-btn" >Konsoller</Text>
+    
     <img src="/icons/arrow_up.svg" alt="Arrow up icon">
     </div>
 
-    <div id="konsoller_list" class="flex flex-col">
-    <a class="category category_btn min-h-10 place-content-center" href="/switch2">
-        <p class="ml-2">Switch 2-Udvalg</p>
+    <div id="konsoller_list" class="flex flex-col gap-3 mb-3">
+    <a class=" category-cta  min-h-10 place-content-center" href="/switch2">
+        <Text class="ml-2">Switch 2-Udvalg</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/playstation">
-        <p class="ml-2">Playstation</p>
+    <a class=" category-cta category category_btn min-h-10 place-content-center" href="/playstation">
+        <Text class="ml-2">Playstation</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/xbox">
-        <p class="ml-2">Xbox</p>
+    <a class=" category-cta category category_btn min-h-10 place-content-center" href="/xbox">
+        <Text class="ml-2">Xbox</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
-        <p class="ml-2">Sega (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <Text class="ml-2">Sega (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
-        <p class="ml-2">Evercade (WIP)</p>
+    <a class=" category-cta category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <Text class="ml-2">Evercade (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="">
-        <p class="ml-2">Andre konsoller (WIP)</p>
+    <a class=" category-cta category category_btn min-h-10 place-content-center" href="">
+        <Text class="ml-2">Andre konsoller (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
-        <p class="ml-2">Konsol tilbehør</p>
+    <a class=" category-cta category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <Text class="ml-2">Konsol tilbehør</Text>
     </a>
 
-    <a class="category category_btn min-h-10 place-content-center" href="/konsoller/nes">
-        <p class="ml-2">Reservedele til konsoller (WIP)</p>
+    <a class="  category-cta category category_btn min-h-10 place-content-center" href="/konsoller/nes">
+        <Text class="ml-2">Reservedele til konsoller (WIP)</Text>
     </a>
     </div>
 </div>
 
-<div class="flex flex-col category">
-    <div id="merch" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+<div class="flex flex-col category category-cta-gap">
+    <div id="merch" class="inactive_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
         <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Merchandise</p>
+    <Text color="white">Merchandise</Text>
     <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
     </div>
 
     <div id="merch_list" class="hidden">
-<a class="category category_btn min-h-10 flex" href="">
-    <p class="ml-2">Disney Infinite (WIP)</p>
+<a class="category-cta category category_btn min-h-10 flex" href="">
+    <Text class="ml-2">Disney Infinite (WIP)</Text>
     </a>
     </div>
 </div>
 
-<div class="flex flex-col category">
-    <div id="figurer" class="inactive_category outline-b outline-2 flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
+<div class="flex flex-col category category-cta-gap">
+    <div id="figurer" class="inactive_category flex flex-row place-content-between items-center h-20 px-2 hover-pointer">
         <img src="/icons/menu.svg" alt="Menu icon">
-    <p class="text-white">Figurer til spil</p>
+    <Text color="white">Figurer til spil</Text>
     <img src="/icons/arrow_up.svg" alt="Arrow up icon" class="inactive_arrow">
     </div>
 
     <div id="figurer_list" class="hidden flex flex-col">
-    <a class="category category_btn min-h-10 flex" href="...">
-    <p class="ml-2">Skylanders (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 flex" href="...">
+        <Text class="ml-2">Skylanders (WIP)</Text>
     </a>
 
-    <a class="category category_btn min-h-10 flex" href="...">
-    <p class="ml-2">Disney Infinite (WIP)</p>
+    <a class="category-cta category category_btn min-h-10 flex" href="...">
+        <Text class="ml-2">Disney Infinite (WIP)</Text>
     </a>
     </div>
 </div>
@@ -113,7 +115,7 @@ const data = await fetch(url, options).then((res) => {
         transform: rotate(90deg);
     }
 
-    .category{
+    /* .category{
         outline: 2px solid black;
     }
 
@@ -121,7 +123,7 @@ const data = await fetch(url, options).then((res) => {
         outline: 2px solid black;
         background: var(--cta-background);
         font-color: var(--cta-text-secondary);
-    }
+    } */
 
 </style>
 
