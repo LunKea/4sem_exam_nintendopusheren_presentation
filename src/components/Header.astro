@@ -21,129 +21,157 @@ import Heading from "./Heading.astro";
       <Text color="secondary" weight="bold">Nintendo Switch 2 release</Text>
     </div>
 
-    <div class="px-10 w-full">
-      <div class="grid grid-cols-5 w-full border border-black items-stretch">
-        <a
-          href="Om_Nintendopusheren"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-b border-black"
+    <div class="px-2 sm:px-6 lg:px-10 w-full relative">
+      <!-- Main Menu Buttons -->
+      <div class="flex flex-row flex-wrap justify-center gap-2 sm:gap-3 lg:gap-5">
+        <button 
+          class="menu-button bg-red-600 hover:bg-red-700 text-white font-bold flex-1 min-w-[120px] sm:min-w-[140px] py-2 sm:py-3 px-2 rounded-2xl transition text-sm sm:text-base"
+          data-menu="games"
         >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Om Nintendopusheren</Text
-          >
-        </a>
-        <a
-          href="/butikken"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-b border-black"
+          Spil til børn
+        </button>
+        <button 
+          class="menu-button bg-red-600 hover:bg-red-700 text-white font-bold flex-1 min-w-[120px] sm:min-w-[140px] py-2 sm:py-3 px-2 rounded-2xl transition text-sm sm:text-base"
+          data-menu="new"
         >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Butikken</Text
-          >
-        </a>
-        <a
-          href="/wip"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-b border-black"
+          Ugens nye varer
+        </button>
+        <button 
+          class="menu-button bg-red-600 hover:bg-red-700 text-white font-bold flex-1 min-w-[120px] sm:min-w-[140px] py-2 sm:py-3 px-2 rounded-2xl transition text-sm sm:text-base"
+          data-menu="info"
         >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Reperationer</Text
-          >
-        </a>
-        <a
-          href="/buying"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-b border-black"
+          Information
+        </button>
+        <button 
+          class="menu-button bg-red-600 hover:bg-red-700 text-white font-bold flex-1 min-w-[120px] sm:min-w-[140px] py-2 sm:py-3 px-2 rounded-2xl transition text-sm sm:text-base"
+          data-menu="services"
         >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Indkøb fra private</Text
-          >
-        </a>
-        <a
-          href="/Om_Nintendopusheren"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-b border-black"
+          Services
+        </button>
+        <button 
+          class="menu-button bg-red-600 hover:bg-red-700 text-white font-bold flex-1 min-w-[120px] sm:min-w-[140px] py-2 sm:py-3 px-2 rounded-2xl transition text-sm sm:text-base"
+          data-menu="contact"
         >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Shipping outside <br /> Denmark</Text
-          >
-        </a>
+          Åbningstider, adresse og kontakt
+        </button>
+      </div>
 
-        <a
-          href="kids"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-black"
-        >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Spil til børn</Text
-          >
-        </a>
-        <a
-          href="/wip"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-black"
-        >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Information</Text
-          >
-        </a>
-        <a
-          href="weekly"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-black"
-        >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Ugens nye varer</Text
-          >
-        </a>
-        <a
-          href="adresse"
-          class="grid_block flex justify-center items-center p-3 min-h-16 border-r border-black"
-        >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Åbningstider og adresse</Text
-          >
-        </a>
-        <a
-          href="kontakt"
-          class="grid_block flex justify-center items-center p-3 min-h-16"
-        >
-          <Text
-            size="small"
-            weight="bold"
-            color="secondary"
-            stylingclasses="text-center">Kontakt</Text
-          >
-        </a>
+      <!-- Sub-menus -->
+      <div class="absolute top-full left-2 right-2 sm:left-6 sm:right-6 lg:left-10 lg:right-10 bg-white rounded mt-2 z-50">
+        <!-- Om Nintendopusheren submenu -->
+        <div id="menu-om" class="submenu hidden px-6 py-4">
+        <div class="border-b-2 border-red-600 pb-4 mb-4">
+          <h3 class="font-bold text-base">Om Nintendopusheren</h3>
+        </div>
+        <div class="space-y-0">
+          <div class="border-b-2 border-red-600 pb-4 mb-4">
+            <a href="/butikken" class="font-bold text-base hover:text-red-600 transition block">Butikken</a>
+          </div>
+          <div class="border-b-2 border-red-600 pb-4 mb-4">
+            <a href="/wip" class="font-bold text-base hover:text-red-600 transition block">Begivenheder</a>
+          </div>
+          <div class="pb-4">
+            <a href="#" class="font-bold text-base hover:text-red-600 transition block">Midnight release</a>
+          </div>
+        </div>
+        </div>
+
+        <!-- Reparationer submenu -->
+        <div id="menu-services" class="submenu hidden px-6 py-4">
+        <div class="border-b-2 border-red-600 pb-4 mb-4">
+          <h3 class="font-bold text-base">Reparationer</h3>
+        </div>
+        <div class="space-y-0">
+          <div class="border-b-2 border-red-600 pb-4 mb-4">
+            <a href="/buying" class="font-bold text-base hover:text-red-600 transition block">Indkøb fra private</a>
+          </div>
+          <div class="pb-4">
+            <a href="/shipping" class="font-bold text-base hover:text-red-600 transition block">Shipping outside Denmark</a>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
   <a href="adresse" class="mt-auto">
-<img src="/img/time.png" alt="Logo" class="max-w-50 h-auto mt-auto" />
+    <img src="/img/time.png" alt="Logo" class="max-w-50 h-auto mt-auto" />
   </a>
 </section>
 
 <style>
-  .grid_block {
-    background: var(--cta-background);
+  .menu-button {
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+  }
+
+  .submenu {
+    animation: slideDown 0.3s ease;
+  }
+
+  .submenu.hidden {
+    display: none;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuButtons = document.querySelectorAll('.menu-button');
+    let activeMenu = null;
+
+    menuButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const menuType = button.dataset.menu;
+        
+        // Only toggle menus for info and services
+        if (menuType !== 'info' && menuType !== 'services') {
+          return; // Allow navigation for other buttons
+        }
+        
+        e.preventDefault();
+        
+        // Map button clicks to submenu IDs
+        let menuId;
+        if (menuType === 'info') {
+          menuId = 'menu-om';
+        } else if (menuType === 'services') {
+          menuId = 'menu-services';
+        }
+
+        // If clicking the same menu button, toggle it off
+        if (activeMenu === menuId) {
+          document.querySelectorAll('.submenu').forEach(menu => {
+            menu.classList.add('hidden');
+          });
+          activeMenu = null;
+          return;
+        }
+
+        // Hide all submenus
+        document.querySelectorAll('.submenu').forEach(menu => {
+          menu.classList.add('hidden');
+        });
+
+        // Show the selected submenu
+        if (menuId) {
+          const selectedMenu = document.getElementById(menuId);
+          if (selectedMenu) {
+            selectedMenu.classList.remove('hidden');
+            activeMenu = menuId;
+          }
+        }
+      });
+    });
+  });
+</script>
